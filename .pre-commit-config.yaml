@@ -3,7 +3,7 @@ ci:
 
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: c60c980e561ed3e73101667fe8365c609d19a438 # frozen: v0.15.9
+    rev: 6fec9b7edb08fd9989088709d864a7826dc74e80  # frozen: v0.15.12
     hooks:
       - id: ruff
         args:
@@ -33,7 +33,7 @@ repos:
           # isort rules get confused in the temporary files
           - --ignore=I
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: c2bc67fe8f8f549cc489e00ba8b45aa18ee713b1 # frozen: v3.8.1
+    rev: 515f543f5718ebfd6ce22e16708bb32c68ff96e1  # frozen: v3.8.3
     hooks:
       - id: prettier
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -44,7 +44,7 @@ repos:
       - id: check-executables-have-shebangs
       - id: requirements-txt-fixer
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: d72e5408a82df0b0cb6b9c878fb8cb4e947c1859 # frozen: v10.2.0
+    rev: 9158d5162f915488785c296b5d08d6d18be10d32  # frozen: v10.3.0
     hooks:
       - id: eslint
         files: \.[jt]sx?$ # *.js, *.jsx, *.ts and *.tsx
