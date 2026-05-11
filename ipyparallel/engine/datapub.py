@@ -2,7 +2,6 @@
 
 # Copyright (c) IPython Development Team.
 # Distributed under the terms of the Modified BSD License.
-from ipykernel.jsonutil import json_clean
 from jupyter_client.session import Session, extract_header
 from traitlets import Any, CBytes, Dict, Instance
 from traitlets.config import Configurable
@@ -27,6 +26,7 @@ class ZMQDataPublisher(Configurable):
         ----------
         data : dict
             The data to be published. Think of it as a namespace.
+            Keys should be strings.
         """
         session = self.session
         buffers = serialize_object(
@@ -34,7 +34,7 @@ class ZMQDataPublisher(Configurable):
             buffer_threshold=session.buffer_threshold,
             item_threshold=session.item_threshold,
         )
-        content = json_clean(dict(keys=list(data.keys())))
+        content = dict(keys=list(data.keys()))
         session.send(
             self.pub_socket,
             'data_message',
