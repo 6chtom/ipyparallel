@@ -13,7 +13,7 @@ export class Sidebar extends Widget {
   constructor(options: Sidebar.IOptions) {
     super();
     this.addClass("ipp-Sidebar");
-    let layout = (this.layout = new PanelLayout());
+    const layout = (this.layout = new PanelLayout());
 
     const injectClientCodeForCluster = options.clientCodeInjector;
     const getClientCodeForCluster = options.clientCodeGetter;

@@ -62,8 +62,7 @@ export class NewCluster extends React.Component<
    */
   constructor(props: NewCluster.IProps) {
     super(props);
-    let model: INewCluster;
-    model = props.initialModel;
+    const model: INewCluster = props.initialModel;
 
     this.state = { model };
   }
@@ -74,7 +73,7 @@ export class NewCluster extends React.Component<
    * be sent as the result of the dialog.
    */
   componentDidUpdate(): void {
-    let model: INewCluster = { ...this.state.model };
+    const model: INewCluster = { ...this.state.model };
     this.props.stateEscapeHatch(model);
   }
 
@@ -171,7 +170,7 @@ export class NewCluster extends React.Component<
  *
  * @param model: the initial model.
  *
- * @returns a promse that resolves with the user-selected Dialogs for the
+ * @returns a promise that resolves with the user-selected Dialogs for the
  *   cluster model. If they pressed the cancel button, it resolves with
  *   the original model.
  */
