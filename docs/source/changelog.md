@@ -6,6 +6,12 @@ Changes in IPython Parallel
 
 ## 9.1
 
+### 9.2.0 - 2026-05
+
+9.2.0 updates JupyterLab extension dependencies and removes some use of deprecated APIs in ipykernel.
+
+([full changelog](https://github.com/ipython/ipyparallel/compare/9.1.0...9.2.0))
+
 ### 9.1.0 - 2026-03
 
 9.1.0 introduces a new task labeling feature for filtering task results (Thanks, @ottointhesky!).

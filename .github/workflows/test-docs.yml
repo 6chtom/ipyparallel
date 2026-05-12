@@ -10,6 +10,9 @@ on:
       - "**"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 env:
   # UTF-8 content may be interpreted as ascii and causes errors without this.
   LANG: C.UTF-8
@@ -24,6 +27,7 @@ jobs:
           # make rediraffecheckdiff requires git history to compare current
           # commit with the main branch and previous releases.
           fetch-depth: 0
+          persist-credentials: false
 
       - uses: actions/setup-python@v6
         with:
@@ -54,7 +58,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           cd docs
-          export REDIRAFFE_BRANCH=origin/${{ github.base_ref }}
+          export REDIRAFFE_BRANCH=origin/${GITHUB_BASE_REF}
           make rediraffecheckdiff
 
       # this should check currently published 'stable' links for redirects

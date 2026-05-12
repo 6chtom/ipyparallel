@@ -24,7 +24,7 @@ repos:
   # than ruff itself
   # but has trouble with isort rules
   - repo: https://github.com/nbQA-dev/nbQA
-    rev: f96ec7f3b26a32619435686eb5813235f7e3327e # frozen: 1.9.1
+    rev: d31b7eae1767c43460afb3ba130e0a6602933abe # frozen: 1.9.1
     hooks:
       - id: nbqa-ruff-format
       - id: nbqa-ruff-check
@@ -36,6 +36,19 @@ repos:
     rev: 515f543f5718ebfd6ce22e16708bb32c68ff96e1 # frozen: v3.8.3
     hooks:
       - id: prettier
+
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: a4727cbbcd26d7098e96b9cb738169b59711ae51 # frozen: v1.24.1
+    hooks:
+      - id: zizmor
+        args:
+          - --fix=all
+      - id: zizmor
+        args:
+          - --fix=all
+          - --config=zizmor-strict.yaml
+        files: .github/workflows/release.yml
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
     hooks:
