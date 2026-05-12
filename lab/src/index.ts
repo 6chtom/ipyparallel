@@ -53,6 +53,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
   activate,
   id: PLUGIN_ID,
   requires: [IConsoleTracker, INotebookTracker, ISettingRegistry, IStateDB],
+  description: "Manage IPython Parallel clusters from the JupyterLab sidebar.",
   optional: [ILabShell],
   autoStart: true,
 };
@@ -76,7 +77,7 @@ async function activate(
   const id = "ipp-cluster-launcher";
 
   const isLab = !!labShell;
-  const isRetroTree = PageConfig.getOption("retroPage") == "tree";
+  const isRetroTree = PageConfig.getOption("retroPage") === "tree";
 
   const clientCodeInjector = async (model: IClusterModel) => {
     const editor = await Private.getCurrentEditor(
@@ -177,7 +178,7 @@ async function activate(
 
   // Whether the cluster clients should aggressively inject themselves
   // into the current session.
-  let autoStartClient: boolean = false;
+  const autoStartClient: boolean = false;
 
   // Update the existing trackers and signals in light of a change to the
   // settings system. In particular, this reacts to a change in the setting
@@ -246,6 +247,7 @@ async function activate(
   // If either is not found, it bails.
   app.commands.addCommand(CommandIDs.injectClientCode, {
     label: "Inject IPython Client Connection Code",
+    describedBy: {},
     execute: async () => {
       const cluster = Private.clusterFromClick(app, sidebar.clusterManager);
       if (!cluster) {
@@ -258,6 +260,7 @@ async function activate(
   // Add a command to launch a new cluster.
   app.commands.addCommand(CommandIDs.newCluster, {
     label: (args) => (args["isPalette"] ? "Create New Cluster" : "NEW"),
+    describedBy: {},
     execute: () => sidebar.clusterManager.create(),
     iconClass: (args) =>
       args["isPalette"] ? "" : "jp-AddIcon jp-Icon jp-Icon-16",
@@ -273,6 +276,7 @@ async function activate(
   // Add a command to launch a new cluster.
   app.commands.addCommand(CommandIDs.startCluster, {
     label: "Start Cluster",
+    describedBy: {},
     execute: () => {
       const cluster = Private.clusterFromClick(app, sidebar.clusterManager);
       if (!cluster) {
@@ -285,6 +289,7 @@ async function activate(
   // Add a command to stop a cluster.
   app.commands.addCommand(CommandIDs.stopCluster, {
     label: "Shutdown Cluster",
+    describedBy: {},
     execute: () => {
       const cluster = Private.clusterFromClick(app, sidebar.clusterManager);
       if (!cluster) {
@@ -297,6 +302,7 @@ async function activate(
   // Add a command to resize a cluster.
   app.commands.addCommand(CommandIDs.scaleCluster, {
     label: "Scale Cluster…",
+    describedBy: {},
     execute: () => {
       const cluster = Private.clusterFromClick(app, sidebar.clusterManager);
       if (!cluster) {
@@ -361,11 +367,6 @@ async function activate(
 }
 
 namespace Private {
-  /**
-   * A private counter for ids.
-   */
-  export let id = 0;
-
   /**
    * Whether a kernel should be used. Only evaluates to true
    * if it is valid and in python.
@@ -438,7 +439,7 @@ rc`;
   ): Kernel.IKernelConnection | null | undefined {
     // Get a handle on the most relevant kernel,
     // whether it is attached to a notebook or a console.
-    let current = shell.currentWidget;
+    const current = shell.currentWidget;
     let kernel: Kernel.IKernelConnection | null | undefined;
     if (current && notebookTracker.has(current)) {
       kernel = (current as NotebookPanel).sessionContext.session?.kernel;
@@ -467,7 +468,7 @@ rc`;
   ): Promise<CodeEditor.IEditor | null | undefined> {
     // Get a handle on the most relevant kernel,
     // whether it is attached to a notebook or a console.
-    let current = app.shell.currentWidget;
+    const current = app.shell.currentWidget;
     let editor: CodeEditor.IEditor | null | undefined;
     if (current && notebookTracker.has(current)) {
       NotebookActions.insertAbove((current as NotebookPanel).content);

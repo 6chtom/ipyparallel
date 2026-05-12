@@ -282,7 +282,7 @@ export class ClusterManager extends Widget {
    */
   protected onAfterAttach(msg: Message): void {
     super.onAfterAttach(msg);
-    let node = this._clusterListing.node;
+    const node = this._clusterListing.node;
     node.addEventListener("p-dragenter", this);
     node.addEventListener("p-dragleave", this);
     node.addEventListener("p-dragover", this);
@@ -293,7 +293,7 @@ export class ClusterManager extends Widget {
    * Handle `before-detach` messages for the widget.
    */
   protected onBeforeDetach(msg: Message): void {
-    let node = this._clusterListing.node;
+    const node = this._clusterListing.node;
     node.removeEventListener("p-dragenter", this);
     node.removeEventListener("p-dragleave", this);
     node.removeEventListener("p-dragover", this);
@@ -378,13 +378,13 @@ export class ClusterManager extends Widget {
    * Handle the `'mousemove'` event for the widget.
    */
   private _evtMouseMove(event: MouseEvent): void {
-    let data = this._dragData;
+    const data = this._dragData;
     if (!data) {
       return;
     }
     // Check for a drag initialization.
-    let dx = Math.abs(event.clientX - data.pressX);
-    let dy = Math.abs(event.clientY - data.pressY);
+    const dx = Math.abs(event.clientX - data.pressX);
+    const dy = Math.abs(event.clientY - data.pressY);
     if (dx >= DRAG_THRESHOLD || dy >= DRAG_THRESHOLD) {
       event.preventDefault();
       event.stopPropagation();
@@ -641,7 +641,7 @@ export namespace ClusterManager {
  * A React component for a launcher button listing.
  */
 function ClusterListing(props: IClusterListingProps) {
-  let listing = props.clusters.map((cluster) => {
+  const listing = props.clusters.map((cluster) => {
     return (
       <ClusterListingItem
         isActive={cluster.id === props.activeClusterId}
@@ -716,13 +716,13 @@ function ClusterListingItem(props: IClusterListingItemProps) {
   let cluster_state = "Stopped";
   if (cluster.controller) {
     cluster_state = cluster.controller.state.state;
-    if (cluster_state == "after") {
+    if (cluster_state === "after") {
       cluster_state = "Stopped";
     }
   }
 
   // stop action is 'delete' for already-stopped clusters
-  let STOP = cluster_state === "Stopped" ? "DELETE" : "STOP";
+  const STOP = cluster_state === "Stopped" ? "DELETE" : "STOP";
 
   return (
     <li
@@ -749,7 +749,7 @@ function ClusterListingItem(props: IClusterListingItemProps) {
         />
         <button
           className={`ipp-ClusterListingItem-button ipp-ClusterListingItem-start jp-mod-styled ${
-            cluster_state == "Stopped" ? "" : "ipp-hidden"
+            cluster_state === "Stopped" ? "" : "ipp-hidden"
           }`}
           onClick={async (evt) => {
             evt.stopPropagation();
