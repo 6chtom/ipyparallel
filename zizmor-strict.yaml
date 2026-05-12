@@ -1,0 +1,7 @@
+# separate zizmor config for workflows with
+# default
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        "*": hash-pin
