@@ -30,7 +30,6 @@ classifiers = [
     "License :: OSI Approved :: BSD License",
     "Programming Language :: Python",
 ]
-urls = {Homepage = "https://ipython.org"}
 requires-python = ">=3.10"
 dependencies = [
     "decorator",
@@ -44,6 +43,13 @@ dependencies = [
     "python-dateutil>=2.1",
     "tqdm",
 ]
+
+[project.urls]
+Homepage = "https://ipython.org"
+Documentation = "https://ipyparallel.readthedocs.io"
+Source = "https://github.com/ipython/ipyparallel"
+Issues = "https://github.com/ipython/ipyparallel/issues"
+Changelog = "https://github.com/ipython/ipyparallel/blob/main/docs/source/changelog.md"
 
 [project.entry-points."ipyparallel.controller_launchers"]
 batch = "ipyparallel.cluster.launcher:BatchControllerLauncher"
