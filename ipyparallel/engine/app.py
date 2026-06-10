@@ -729,7 +729,7 @@ class IPEngine(BaseParallelApplication):
                 control_socket, control_thread.io_loop
             )
 
-            kernel_kwargs["shell_streams"] = [zmqstream.ZMQStream(shell_socket)]
+            kernel_kwargs["shell_stream"] = zmqstream.ZMQStream(shell_socket)
 
             self.kernel = Kernel.instance(
                 parent=self,
